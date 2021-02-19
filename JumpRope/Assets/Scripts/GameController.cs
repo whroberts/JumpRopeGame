@@ -45,38 +45,13 @@ public class GameController : MonoBehaviour
     void Start()
     {
         _ropeMultiplier = new float[] { 1f / 4f, 2f / 7f, 1f / 3f };
-        /*
-        if (_uiController._globalDifficulty == 0)
-        {
-            _source.clip = _clip0;
-        } else if (_uiController._globalDifficulty == 1)
-        {
-            _source.clip = _clip1;
-        } else if (_uiController._globalDifficulty == 2)
-        {
-            _source.clip = _clip2;
-        } else if (_uiController._globalDifficulty == 3)
-        {
-            _source.clip = _clip3;
-        } else
-        {
-            print("Error, audio clip or difficulty was not available");
-        }
-        print("1");
-        StartCoroutine("WaitForRestart");
-        */
 
         //animation parameters
         _animParamPlayer = _p_animator.GetFloat("anim_speed_player");
         _animParamRope = _r_animator.GetFloat("anim_speed_rope");
 
-        //difference between the animation time of the rope
-        //player animation must be shorter than the rope animation all the time
         _currentDifference = ((_r_animLength / _animParamRope) - (_p_animLength / _animParamPlayer));
 
-        //start corutine to speed up rope progressively
-        //StartCoroutine("SpeedUp");
-        //StartCoroutine("DifficultySpeed");
     }
 
     //speed up the rope maximum of three times

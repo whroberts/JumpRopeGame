@@ -11,7 +11,7 @@ public class MenuScreens : MonoBehaviour
     private void Awake()
     {
         _menuSound = GameObject.Find("MenuSound");
-        DontDestroyOnLoad(_menuSound);
+        //DontDestroyOnLoad(_menuSound);
     }
 
     public void PlayGame()

@@ -12,17 +12,20 @@ public class DamageController : MonoBehaviour
     [SerializeField] ParticleSystem hurtEffect;
     [SerializeField] TMP_Text _finalScoreText;
     [SerializeField] GameObject _finalScorePanel;
+    [SerializeField] GameObject _deathScreen;
+    [SerializeField] GameObject _rope;
 
     GameSetup _gameSetup;
-    Animator anim;
+    Animator _anim;
     PlayerScoreCounter score_counter;
-    UIController uIController;
+    UIController _uiController;
 
     void Start()
     {
         _gameSetup = FindObjectOfType<GameSetup>();
         score_counter = character.GetComponent<PlayerScoreCounter>();
-        anim = character.GetComponent<Animator>();
+        _anim = character.GetComponent<Animator>();
+        _uiController = FindObjectOfType<UIController>();
         
 
     }
@@ -31,12 +34,14 @@ public class DamageController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Rope"))
         {
-            anim.SetBool("trip", true);
             score_counter.DamagePlayer(10);
             hurtEffect.Play();
             if (score_counter.curHealth == 0)
             {
-                StartCoroutine("Death");
+                StartCoroutine("DeathAnimation");
+            } else if (score_counter.curHealth > 0)
+            {
+                _anim.SetBool("trip", true);
             }
         }
     }
@@ -45,21 +50,18 @@ public class DamageController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Rope"))
         {
-            anim.SetBool("trip", false);
+            _anim.SetBool("trip", false);
         }
     }
 
     IEnumerator Death()
     {
         //character dying effect
-
         _finalScoreText.text = score_counter._finalScore.ToString();
         _finalScorePanel.SetActive(true);
-        print("1");
         _gameSetup.Kill();
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene(2);
-        print("p");
         //play some effect
 
         // I want something to flash on the screen
@@ -69,5 +71,24 @@ public class DamageController : MonoBehaviour
         // stop the rope from spinning
 
         //yield return new WaitForSeconds(5);
+    }
+
+    IEnumerator DeathAnimation()
+    {
+        float animation_length = 0;
+        _anim.SetBool("death", true);
+        _deathScreen.SetActive(true);
+        AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            switch (clip.name)
+            {
+                case "Death":
+                    animation_length = clip.length;
+                    break;
+            }
+        }
+        yield return new WaitForSeconds(animation_length+4);
+        StartCoroutine("Death");
     }
 }

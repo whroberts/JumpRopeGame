@@ -852,7 +852,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 1879672a517fe0047041e82b20893a93
+      Hash: 05be283e3ec9a229bd66a3747e1bd335
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DamageController
@@ -993,4 +993,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/MainDanceFloor.unity
   - Assets/Scenes/FinalScreen.unity
-  playerPath: C:/Users/whr5t/Dropbox/Unity Projects/JumpRope/Builds/JumpRopeBuild_V10/JumpRope.exe
+  playerPath: C:/Users/whr5t/Dropbox/Unity Projects/JumpRope/Builds/JumpRopeBuild_V11/JumpRope.exe

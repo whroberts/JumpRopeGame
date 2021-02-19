@@ -35,8 +35,8 @@ public class GameSetup : MonoBehaviour
         _audioSourcePlayer = _player.GetComponent<AudioSource>();
         _gameControllerScript = GetComponent<GameController>();
         _uiController = FindObjectOfType<UIController>();
-        _menuSound = GameObject.Find("MenuSound");
-        _menuMusic = _menuSound.GetComponent<AudioSource>();
+        //_menuSound = GameObject.Find("MenuSound");
+        //_menuMusic = _menuSound.GetComponent<AudioSource>();
 
         Pause();
         StopAudio();
@@ -92,7 +92,7 @@ public class GameSetup : MonoBehaviour
     }
     public void Play()
     {
-        _menuMusic.Pause();
+        //_menuMusic.Pause();
         _audioSource.Play();
         _player.SetActive(true);
         _rope.SetActive(true);
@@ -118,11 +118,10 @@ public class GameSetup : MonoBehaviour
 
     public void Kill()
     {
-        _menuMusic.clip = _deadMusic;
-        _menuMusic.volume = 0.3f;
-        _menuMusic.Play();
+        //_menuMusic.clip = _deadMusic;
+        //_menuMusic.volume = 0.3f;
+        //_menuMusic.Play();
         _audioSourcePlayer.enabled = false;
-        _rope.SetActive(false);
         _arrowContainer.SetActive(false);
         _effectsContainer.SetActive(false);
         _audioSource.Pause();
